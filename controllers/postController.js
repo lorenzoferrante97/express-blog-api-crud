@@ -32,3 +32,5 @@ const modify = (req, res) => {
 const destroy = (req, res) => {
 
 };
+
+export {index, show, store, update, modify, destroy};
