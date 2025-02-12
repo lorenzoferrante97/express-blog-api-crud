@@ -5,7 +5,17 @@ import arrayPosts from '../data/posts.js';
 
 // function -> index
 const index = (req, res) => {
-    res.json(arrayPosts);
+
+    let arrayPostsFiltered = arrayPosts;
+
+    const tag = req.query.tag;
+
+    // se presente una chiave nell'url
+    if(tag) {
+        arrayPostsFiltered = arrayPosts.filter( post => { post.tags.includes(tag) });
+    }
+
+    res.json(arrayPostsFiltered);
 };
 
 // function -> show
