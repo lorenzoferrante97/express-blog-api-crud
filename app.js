@@ -7,6 +7,9 @@ import postsRouter from './routers/postsRouter.js';
 
 app.use(express.static('public'));
 
+// use router
+app.use('/posts', postsRouter);
+
 app.get('/', (req, res) => {
     res.send('Server root');
 
