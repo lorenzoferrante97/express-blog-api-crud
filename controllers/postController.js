@@ -10,10 +10,16 @@ const index = (req, res) => {
 
     const tag = req.query.tag;
 
+    // console.log("tag: ", tag)
+
     // se presente una chiave nell'url
     if(tag) {
-        arrayPostsFiltered = arrayPosts.filter( post => { post.tags.includes(tag) });
-    }
+        // console.log("sono entrato nell'if")
+        // arrayPostsFiltered = arrayPosts.filter( post => {
+        //     return post.tags.includes(tag);
+        // });
+        arrayPostsFiltered = arrayPosts.filter( post => post.tags.includes(tag) );
+    };
 
     res.json(arrayPostsFiltered);
 };
