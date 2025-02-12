@@ -56,13 +56,29 @@ const destroy = (req, res) => {
     const id = parseInt(req.params.id);
 
     let postFiltered = arrayPosts.find( post => post.id === id);
-    let postIndex = arrayPosts.indexOf(postFiltered);
 
-    // eliminare post
-    arrayPosts.splice(postIndex, 1);
+    // se post con id è presente
+    if (postFiltered) {
 
-    console.log(arrayPosts)
-    res.sendStatus(204);
+        let postIndex = arrayPosts.indexOf(postFiltered);
+
+        // eliminare post
+        arrayPosts.splice(postIndex, 1);
+
+        console.log(arrayPosts)
+        res.sendStatus(204);
+    } else {
+        res.status(404);
+
+        const notFound = {
+            status: 404,
+            error: "Not Found",
+            message: "La risorsa che vuoi eliminare non è stata trovata"
+        }
+
+        res.json(notFound);
+    }
+
 };
 
 export default {index, show, store, update, modify, destroy};
