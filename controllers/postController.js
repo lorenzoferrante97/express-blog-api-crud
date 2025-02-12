@@ -52,7 +52,17 @@ const modify = (req, res) => {
 
 // function -> destroy
 const destroy = (req, res) => {
-    res.send("destroy funziona");
+
+    const id = parseInt(req.params.id);
+
+    let postFiltered = arrayPosts.find( post => post.id === id);
+    let postIndex = arrayPosts.indexOf(postFiltered);
+
+    // eliminare post
+    arrayPosts.splice(postIndex, 1);
+
+    console.log(arrayPosts)
+    res.sendStatus(204);
 };
 
 export default {index, show, store, update, modify, destroy};
