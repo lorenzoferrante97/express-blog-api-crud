@@ -26,7 +26,13 @@ const index = (req, res) => {
 
 // function -> show
 const show = (req, res) => {
-    res.send("show funziona");
+
+    const id = parseInt(req.params.id);
+
+    let postFiltered = arrayPosts.find( post => post.id === id);
+
+
+    res.json(postFiltered);
 };
 
 // function -> store
