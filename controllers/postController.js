@@ -57,7 +57,22 @@ const store = (req, res) => {
 
 // function -> update
 const update = (req, res) => {
-    res.send("update funziona");
+    
+    // recupero post per update
+    const id = parseInt(req.params.id);
+    let postFiltered = arrayPosts.find( post => post.id === id);
+
+    // se presente
+    if(postFiltered) {
+        
+        // per ogni chiave dell'oggetto in body
+        for (const key in req.body) {
+            postFiltered[key] = req.body[key];
+        }
+
+        res.send("Dati aggiornati correttamente");
+    }
+
 };
 
 // function -> modify
