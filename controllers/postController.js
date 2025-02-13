@@ -38,9 +38,21 @@ const show = (req, res) => {
 // function -> store
 const store = (req, res) => {
 
+    // new id per il nuovo post
     let newId = arrayPosts[arrayPosts.length - 1].id + 1;
 
-    res.send("store funziona");
+    // creazione nuovo oggetto
+    let newPost = {
+        id: newId,
+        title: req.body.title,
+        content: req.body.content,
+        image: req.body.image,
+        tags: req.body.tags
+    }
+
+    arrayPosts.push(newPost);
+    console.log(newPost)
+    res.send("nuovo elemento inserito");
 };
 
 // function -> update
