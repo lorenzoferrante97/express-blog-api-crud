@@ -7,6 +7,9 @@ import postsRouter from './routers/postsRouter.js';
 
 app.use(express.static('public'));
 
+// body parser
+app.use(express.json());
+
 // use router
 app.use('/posts', postsRouter);
 
