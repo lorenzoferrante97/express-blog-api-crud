@@ -78,7 +78,7 @@ const update = (req, res) => {
             error: "Not Found",
             message: "La risorsa che vuoi aggiornare non è stata trovata"
         }
-        
+
         res.send(404).json(error);
     }
 
@@ -86,7 +86,30 @@ const update = (req, res) => {
 
 // function -> modify
 const modify = (req, res) => {
-    res.send("modify funziona");
+
+    // recupero post per modify
+    const id = parseInt(req.params.id);
+    let postFiltered = arrayPosts.find( post => post.id === id);
+
+    // se presente
+    if(postFiltered) {
+
+        // per ogni chiave dell'oggetto in body
+        for (const key in req.body) {
+            postFiltered[key] = req.body[key];
+        }
+
+        res.send("Dati aggiornati correttamente");
+    } else {
+
+        const notFound = {
+            status: 404,
+            error: "Not Found",
+            message: "La risorsa che vuoi aggiornare non è stata trovata"
+        }
+        
+        res.send(404).json(error);
+    }
 };
 
 // function -> destroy
