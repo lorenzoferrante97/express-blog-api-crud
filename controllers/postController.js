@@ -37,6 +37,9 @@ const show = (req, res) => {
 
 // function -> store
 const store = (req, res) => {
+
+    let newId = arrayPosts[arrayPosts.length - 1].id + 1;
+
     res.send("store funziona");
 };
 
