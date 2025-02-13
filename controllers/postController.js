@@ -64,13 +64,22 @@ const update = (req, res) => {
 
     // se presente
     if(postFiltered) {
-        
+
         // per ogni chiave dell'oggetto in body
         for (const key in req.body) {
             postFiltered[key] = req.body[key];
         }
 
         res.send("Dati aggiornati correttamente");
+    } else {
+
+        const notFound = {
+            status: 404,
+            error: "Not Found",
+            message: "La risorsa che vuoi aggiornare non è stata trovata"
+        }
+        
+        res.send(404).json(error);
     }
 
 };
