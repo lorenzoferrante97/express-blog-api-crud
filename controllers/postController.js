@@ -146,3 +146,4 @@ const destroy = (req, res) => {
 export default {index, show, store, update, modify, destroy};
 
 // end code
+// end code 2
