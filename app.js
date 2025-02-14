@@ -6,10 +6,13 @@ const port = 3000;
 import postsRouter from './routers/postsRouter.js';
 // import error 404 middleware
 import errorNotFound from './middlewares/errors/notFound.js';
+// import error 500 middleware
+import errorsHandler from './middlewares/errors/errorsHandler.js';
 
 // middlewares
 app.use(express.static('public'));
 app.use(errorNotFound);
+app.use(errorsHandler);
 
 // body parser
 app.use(express.json());
