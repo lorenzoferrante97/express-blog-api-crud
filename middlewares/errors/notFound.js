@@ -9,3 +9,5 @@ const errorNotFound = (err, req, res) => {
     res.status(404).json(notFound);
     
 }
+
+export default errorNotFound;
