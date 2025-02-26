@@ -10,6 +10,8 @@ import errorNotFound from './middlewares/errors/notFound.js';
 // import error 500 middleware
 import errorsHandler from './middlewares/errors/errorsHandler.js';
 
+app.use(cors( { origin: 'http://localhost:5173' } ));
+
 app.get('/', (req, res) => {
     res.send('Server root');
 
@@ -26,7 +28,7 @@ app.use('/posts', postsRouter);
 app.use(express.static('public'));
 app.use(errorNotFound);
 app.use(errorsHandler);
-app.use(cors( { origin: 'http://localhost:5173/' } ));
+
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
