@@ -10,16 +10,16 @@ import errorNotFound from './middlewares/errors/notFound.js';
 // import error 500 middleware
 import errorsHandler from './middlewares/errors/errorsHandler.js';
 
+app.get('/', (req, res) => {
+    res.send('Server root');
+
+});
+
 // body parser
 app.use(express.json());
 
 // use router
 app.use('/posts', postsRouter);
-
-app.get('/', (req, res) => {
-    res.send('Server root');
-
-});
 
 
 // middlewares
