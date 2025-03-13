@@ -50,13 +50,16 @@ const show = (req, res) => {
     FROM posts
     JOIN post_tag ON posts.id = post_tag.post_id
     JOIN tags ON post_tag.tag_id = tags.id
-    WHERE posts.id = 2;
+    WHERE posts.id = ?;
   `;
 
   const getQueryResult = (err, results, dbError, postError) => {
     if (err) return res.status(500).json(dbError);
-    if (results.length === 0) return res.status(404).json(postError);
-    res.json(results[0]);
+    if (results.length === 0) {
+      return res.status(404).json(postError);
+    } else {
+      return results[0];
+    }
   };
 
   const dbQueryError = {
@@ -67,7 +70,16 @@ const show = (req, res) => {
     error: 'Requested Post Not Found',
   };
 
-  connection.query(sql, [id], (err, results) => getQueryResult(err, results, dbQueryError, elementNotFound));
+  connection.query(sql, [id], (err, results) => {
+    const post = getQueryResult(err, results, dbQueryError, elementNotFound);
+
+    connection.query(tagsSql, [id], (err, tagsResults) => {
+      if (err) return res.status(500).json(dbQueryError);
+      post.tags = tagsResults;
+
+      res.json(post);
+    });
+  });
 };
 
 // function -> store
