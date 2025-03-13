@@ -5,22 +5,21 @@ import connection from '../data/db.js';
 
 // function -> index
 const index = (req, res) => {
-  let arrayPostsFiltered = arrayPosts;
-
-  const tag = req.query.tag;
-
+  //   let arrayPostsFiltered = arrayPosts;
+  //   const tag = req.query.tag;
   // console.log("tag: ", tag)
-
   // se presente una chiave nell'url
-  if (tag) {
-    // console.log("sono entrato nell'if")
-    // arrayPostsFiltered = arrayPosts.filter( post => {
-    //     return post.tags.includes(tag);
-    // });
-    arrayPostsFiltered = arrayPosts.filter((post) => post.tags.includes(tag));
-  }
+  //   if (tag) {
+  // console.log("sono entrato nell'if")
+  // arrayPostsFiltered = arrayPosts.filter( post => {
+  //     return post.tags.includes(tag);
+  // });
+  // arrayPostsFiltered = arrayPosts.filter((post) => post.tags.includes(tag));
+  //   }
+  //   res.json(arrayPostsFiltered);
 
-  res.json(arrayPostsFiltered);
+  // query
+  const sql = 'SELECT * from posts';
 };
 
 // function -> show
