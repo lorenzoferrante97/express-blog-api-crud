@@ -45,6 +45,14 @@ const show = (req, res) => {
 
   const sql = 'SELECT * FROM posts WHERE id = ?';
 
+  const tagsSql = `
+    SELECT tags.*
+    FROM posts
+    JOIN post_tag ON posts.id = post_tag.post_id
+    JOIN tags ON post_tag.tag_id = tags.id
+    WHERE posts.id = 2;
+  `;
+
   const getQueryResult = (err, results, dbError, postError) => {
     if (err) return res.status(500).json(dbError);
     if (results.length === 0) return res.status(404).json(postError);
