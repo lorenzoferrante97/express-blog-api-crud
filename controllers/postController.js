@@ -20,6 +20,18 @@ const index = (req, res) => {
 
   // query
   const sql = 'SELECT * from posts';
+
+  const getQueryResult = (err, results, dbError) => {
+    if (err) return res.status(500).json(dbError);
+    res.json(results);
+  };
+
+  const dbQueryError = {
+    error: 'Database Query Error',
+  };
+
+  // connection query
+  connection.query(sql, (err, results) => getQueryResult(err, results, dbQueryError));
 };
 
 // function -> show
