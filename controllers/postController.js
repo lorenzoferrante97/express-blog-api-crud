@@ -48,7 +48,7 @@ const show = (req, res) => {
   const getQueryResult = (err, results, dbError, postError) => {
     if (err) return res.status(500).json(dbError);
     if (results.length === 0) return res.status(404).json(postError);
-    res.json(results);
+    res.json(results[0]);
   };
 
   const dbQueryError = {
