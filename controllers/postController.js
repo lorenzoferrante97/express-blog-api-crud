@@ -114,30 +114,48 @@ const modify = (req, res) => {
 
 // function -> destroy
 const destroy = (req, res) => {
+  //   const id = parseInt(req.params.id);
+
+  //   let postFiltered = arrayPosts.find((post) => post.id === id);
+
+  //   // se post con id è presente
+  //   if (postFiltered) {
+  //     let postIndex = arrayPosts.indexOf(postFiltered);
+
+  //     // eliminare post
+  //     arrayPosts.splice(postIndex, 1);
+
+  //     console.log(arrayPosts);
+  //     res.sendStatus(204);
+  //   } else {
+  //     res.status(404);
+
+  //     const notFound = {
+  //       status: 404,
+  //       error: 'Not Found',
+  //       message: 'La risorsa che vuoi eliminare non è stata trovata',
+  //     };
+
+  //     res.json(notFound);
+  //   }
+
+  // params
   const id = parseInt(req.params.id);
 
-  let postFiltered = arrayPosts.find((post) => post.id === id);
+  // query
+  const sql = 'DELETE FROM posts WHERE id = ?';
 
-  // se post con id è presente
-  if (postFiltered) {
-    let postIndex = arrayPosts.indexOf(postFiltered);
-
-    // eliminare post
-    arrayPosts.splice(postIndex, 1);
-
-    console.log(arrayPosts);
+  const getQueryResult = (err, results, dbError) => {
+    if (err) return res.status(500).json(dbError);
     res.sendStatus(204);
-  } else {
-    res.status(404);
+  };
 
-    const notFound = {
-      status: 404,
-      error: 'Not Found',
-      message: 'La risorsa che vuoi eliminare non è stata trovata',
-    };
+  const dbQueryError = {
+    error: 'Database Query Error',
+  };
 
-    res.json(notFound);
-  }
+  // connection query
+  connection.query(sql, [id], (err) => getQueryResult(err, dbQueryError));
 };
 
 export default { index, show, store, update, modify, destroy };
