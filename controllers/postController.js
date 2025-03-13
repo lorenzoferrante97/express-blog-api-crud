@@ -36,11 +36,30 @@ const index = (req, res) => {
 
 // function -> show
 const show = (req, res) => {
+  //   const id = parseInt(req.params.id);
+
+  //   let postFiltered = arrayPosts.find((post) => post.id === id);
+  //   res.json(postFiltered);
+
   const id = parseInt(req.params.id);
 
-  let postFiltered = arrayPosts.find((post) => post.id === id);
+  const sql = 'SELECT * FROM posts WHERE id = ?';
 
-  res.json(postFiltered);
+  const getQueryResult = (err, results, dbError, postError) => {
+    if (err) return res.status(500).json(dbError);
+    if (results.length === 0) return res.status(404).json(postError);
+    res.json(results);
+  };
+
+  const dbQueryError = {
+    error: 'Database Query Error',
+  };
+
+  const elementNotFound = {
+    error: 'Requested Post Not Found',
+  };
+
+  connection.query(sql, [id], (err, results) => getQueryResult(err, results, dbQueryError, elementNotFound));
 };
 
 // function -> store
